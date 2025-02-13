@@ -37,4 +37,22 @@ public class MyRESTController {
         studentService.saveStudent(student);
         return student;
     }
+
+    @PutMapping("/students")
+    public Student updateStudent(@RequestBody Student student) {
+        studentService.saveStudent(student);
+        return student;
+    }
+
+    @DeleteMapping("/students/{id}")
+    public String deleteStudent(@PathVariable int id) {
+        Student student = studentService.getStudent(id);
+        if (student == null) {
+            throw new NoSuchStudentException("There is no student with id " + id
+            + " in the database");
+
+        }
+        studentService.deleteStudent(id);
+        return "Student with id " + id + " deleted";
+    }
 }
